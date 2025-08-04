@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP Playground & Cheatsheet</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollSmoother.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/TextPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Draggable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/InertiaPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Observer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Flip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/DrawSVGPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/MotionPathPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/GSDevTools.min.js"></script>
+  </head>
+  <body>
+              <nav class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+              <div class="nav-section">
+                <h3>Core</h3>
+                <ul>
+                  <li><a href="#basic-animations">Basic Animations</a></li>
+                  <li><a href="#timeline">Timeline</a></li>
+                  <li><a href="#staggering">Staggering</a></li>
+                  <!-- <li><a href="#easing">Easing</a></li> -->
+                </ul>
+              </div>
+              <div class="nav-section">
+                <h3>Scroll</h3>
+                <ul>
+                  <li><a href="#scroll-trigger">ScrollTrigger</a></li>
+                  <!-- <li><a href="#scroll-smoother">ScrollSmoother</a></li>
+                  <li><a href="#observer">Observer</a></li> -->
+                </ul>
+              </div>
+              <div class="nav-section">
+                <h3>SVG</h3>
+                <ul>
+                  <li><a href="#draw-svg">DrawSVG</a></li>
+                  <!-- <li><a href="#motion-path">MotionPath</a></li> -->
+                </ul>
+              </div>
+              <div class="nav-section">
+                <h3>UI</h3>
+                <ul>
+                  <!-- <li><a href="#flip">Flip</a></li> -->
+                  <li><a href="#draggable">Draggable</a></li>
+                  <!-- <li><a href="#inertia">Inertia</a></li> -->
+                </ul>
+              </div>
+              <div class="nav-section">
+                <h3>Text</h3>
+                <ul>
+                  <!-- <li><a href="#split-text">SplitText</a></li> -->
+                  <li><a href="#text-plugin">TextPlugin</a></li>
+                </ul>
+              </div>
+              <div class="nav-section">
+                <h3>Tools</h3>
+                <ul>
+                  <li><a href="#gsdevtools">GSDevTools</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+                  <header class="header">
+          <div class="header-content">
+            <h1>GSAP Playground</h1>
+            <div class="header-controls">
+              <!-- <button id="theme-toggle" class="btn-icon">🌙</button> -->
+              <button id="mobile-menu" class="btn-icon">☰</button>
+            </div>
+          </div>
+        </header>
+
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <!-- Header -->
+
+        <!-- Main Layout -->
+        <div class="layout">
+          <!-- Sidebar -->
+
+
+          <!-- Main Content -->
+          <main class="main-content">
+            <!-- Basic Animations -->
+            <section id="basic-animations" class="content-section">
+              <h2>Basic Animations</h2>
+              <p>Core GSAP methods: to(), from(), fromTo()</p>
+
+              <div class="demo-container">
+                <div class="demo-controls">
+                  <button class="btn-primary" onclick="runBasicDemo()">
+                    Run Animation
+                  </button>
+                  <button
+                    class="btn-secondary"
+                    onclick="toggleCode('basic-code')"
+                  >
+                    Toggle Code
+                  </button>
+                  <button class="btn-icon" onclick="copyCode('basic-code')">
+                    📋
+                  </button>
+                </div>
+
+                <div class="demo-area">
+                  <div class="demo-box" id="basic-box">gsap.to()</div>
+                  <div class="demo-box" id="basic-box2">gsap.from()</div>
+                  <div class="demo-box" id="basic-box3">gsap.fromTo()</div>
+                </div>
+
+                <div class="code-block" id="basic-code">
+                  <pre><code>// gsap.to()
+gsap.to("#basic-box", {
+    x: 200,
+    rotation: 360,
+    duration: 2,
+    ease: "power2.out"
+});
+
+// gsap.from()
+gsap.from("#basic-box2", {
+    y: -100,
+    opacity: 0,
+    duration: 1.5
+});
+
+// gsap.fromTo()
+gsap.fromTo("#basic-box3", 
+    { scale: 0, rotation: -180 },
+    { scale: 1, rotation: 0, duration: 1 }
+);</code></pre>
+                </div>
+              </div>
+            </section>
+
+            <!-- Timeline -->
+            <section id="timeline" class="content-section">
+              <h2>Timeline</h2>
+              <p>Sequence animations with gsap.timeline()</p>
+
+              <div class="demo-container">
+                <div class="demo-controls">
+                  <button class="btn-primary" onclick="runTimelineDemo()">
+                    Run Timeline
+                  </button>
+                  <button
+                    class="btn-secondary"
+                    onclick="toggleCode('timeline-code')"
+                  >
+                    Toggle Code
+                  </button>
+                  <button class="btn-icon" onclick="copyCode('timeline-code')">
+                    📋
+                  </button>
+                </div>
+
+                <div class="demo-area">
+                  <div class="demo-box timeline-box" id="tl-box1">1</div>
+                  <div class="demo-box timeline-box" id="tl-box2">2</div>
+                  <div class="demo-box timeline-box" id="tl-box3">3</div>
+                </div>
+
+                <div class="code-block" id="timeline-code">
+                  <pre><code>const tl = gsap.timeline();
+
+tl.to("#tl-box1", { x: 100, duration: 1 })
+  .to("#tl-box2", { y: 100, duration: 1 }, "-=0.5")
+  .to("#tl-box3", { rotation: 360, duration: 1 }, "+=0.2");
+  
+// Control timeline
+tl.play();
+tl.pause();
+tl.reverse();
+tl.restart();</code></pre>
+                </div>
+              </div>
+            </section>
+
+            <!-- Staggering -->
+            <section id="staggering" class="content-section">
+              <h2>Staggering</h2>
+              <p>Animate multiple elements with stagger</p>
+
+              <div class="demo-container">
+                <div class="demo-controls">
+                  <button class="btn-primary" onclick="runStaggerDemo()">
+                    Run Stagger
+                  </button>
+                  <button
+                    class="btn-secondary"
+                    onclick="toggleCode('stagger-code')"
+                  >
+                    Toggle Code
+                  </button>
+                  <button class="btn-icon" onclick="copyCode('stagger-code')">
+                    📋
+                  </button>
+                </div>
+
+                <div class="demo-area">
+                  <div class="stagger-grid">
+                    <div class="stagger-item"></div>
+                    <div class="stagger-item"></div>
+                    <div class="stagger-item"></div>
+                    <div class="stagger-item"></div>
+                    <div class="stagger-item"></div>
+                    <div class="stagger-item"></div>
+                    <div class="stagger-item"></div>
+                    <div class="stagger-item"></div>
+                    <div class="stagger-item"></div>
+                  </div>
+                </div>
+
+                <div class="code-block" id="stagger-code">
+                  <pre><code>gsap.from(".stagger-item", {
+    scale: 0,
+    opacity: 0,
+    duration: 0.5,
+    stagger: {
+        amount: 1.5,
+        from: "center",
+        grid: [3, 3]
+    },
+    ease: "back.out(1.7)"
+});</code></pre>
+                </div>
+              </div>
+            </section>
+
+            <!-- ScrollTrigger -->
+            <section id="scroll-trigger" class="content-section">
+              <h2>ScrollTrigger</h2>
+              <p>Trigger animations on scroll</p>
+
+              <div class="demo-container">
+                <div class="demo-controls">
+                  <button
+                    class="btn-secondary"
+                    onclick="toggleCode('scroll-trigger-code')"
+                  >
+                    Toggle Code
+                  </button>
+                  <button
+                    class="btn-icon"
+                    onclick="copyCode('scroll-trigger-code')"
+                  >
+                    📋
+                  </button>
+                </div>
+
+                <div class="demo-area scroll-demo">
+                  <div class="scroll-trigger-box" id="st-box1">
+                    Scroll to see me!
+                  </div>
+                  <div class="spacer"></div>
+                  <div class="scroll-trigger-box" id="st-box2">I'm pinned!</div>
+                  <div class="spacer"></div>
+                  <div class="scroll-trigger-box" id="st-box3">
+                    Scrubbed animation
+                  </div>
+                </div>
+
+                <div class="code-block" id="scroll-trigger-code">
+                  <pre><code>// Basic scroll trigger
+gsap.to("#st-box1", {
+    x: 200,
+    scrollTrigger: {
+        trigger: "#st-box1",
+        start: "top 80%",
+        end: "bottom 20%",
+        scrub: true,
+        markers: true
+    }
+});
+
+// Pinned section
+ScrollTrigger.create({
+    trigger: "#st-box2",
+    pin: true,
+    start: "top center",
+    end: "+=300"
+});</code></pre>
+                </div>
+              </div>
+            </section>
+
+            <!-- DrawSVG -->
+            <section id="draw-svg" class="content-section">
+              <h2>DrawSVG</h2>
+              <p>Animate SVG stroke paths</p>
+
+              <div class="demo-container">
+                <div class="demo-controls">
+                  <button class="btn-primary" onclick="runDrawSVGDemo()">
+                    Draw SVG
+                  </button>
+                  <button
+                    class="btn-secondary"
+                    onclick="toggleCode('draw-svg-code')"
+                  >
+                    Toggle Code
+                  </button>
+                  <button class="btn-icon" onclick="copyCode('draw-svg-code')">
+                    📋
+                  </button>
+                </div>
+
+                <div class="demo-area">
+                  <svg width="300" height="200" viewBox="0 0 300 200">
+                    <path
+                      id="svg-path"
+                      d="M50,100 Q150,50 250,100 T450,100"
+                      stroke="#00ff88"
+                      stroke-width="3"
+                      fill="none"
+                    />
+                    <circle
+                      id="svg-circle"
+                      cx="150"
+                      cy="100"
+                      r="30"
+                      stroke="#ff6b6b"
+                      stroke-width="3"
+                      fill="none"
+                    />
+                  </svg>
+                </div>
+
+                <div class="code-block" id="draw-svg-code">
+                  <pre><code>// Draw SVG path
+gsap.fromTo("#svg-path", {
+    drawSVG: "0%"
+}, {
+    drawSVG: "100%",
+    duration: 2,
+    ease: "power2.inOut"
+});
+
+// Draw circle
+gsap.fromTo("#svg-circle", {
+    drawSVG: "0%"
+}, {
+    drawSVG: "100%",
+    duration: 1.5,
+    delay: 0.5
+});</code></pre>
+                </div>
+              </div>
+            </section>
+
+            <!-- Draggable -->
+            <section id="draggable" class="content-section">
+              <h2>Draggable</h2>
+              <p>Make elements draggable with bounds and inertia</p>
+
+              <div class="demo-container">
+                <div class="demo-controls">
+                  <button class="btn-primary" onclick="initDraggable()">
+                    Enable Dragging
+                  </button>
+                  <button
+                    class="btn-secondary"
+                    onclick="toggleCode('draggable-code')"
+                  >
+                    Toggle Code
+                  </button>
+                  <button class="btn-icon" onclick="copyCode('draggable-code')">
+                    📋
+                  </button>
+                </div>
+
+                <div class="demo-area">
+                  <div class="drag-bounds">
+                    <div class="drag-box" id="drag-box">Drag me!</div>
+                  </div>
+                </div>
+
+                <div class="code-block" id="draggable-code">
+                  <pre><code>Draggable.create("#drag-box", {
+    type: "x,y",
+    bounds: ".drag-bounds",
+    inertia: true,
+    onDrag: function() {
+        console.log("dragging");
+    },
+    onThrowUpdate: function() {
+        console.log("throwing");
+    }
+});</code></pre>
+                </div>
+              </div>
+            </section>
+
+            <!-- Text Plugin -->
+            <section id="text-plugin" class="content-section">
+              <h2>TextPlugin</h2>
+              <p>Animate text content and numbers</p>
+
+              <div class="demo-container">
+                <div class="demo-controls">
+                  <button class="btn-primary" onclick="runTextDemo()">
+                    Animate Text
+                  </button>
+                  <button
+                    class="btn-secondary"
+                    onclick="toggleCode('text-code')"
+                  >
+                    Toggle Code
+                  </button>
+                  <button class="btn-icon" onclick="copyCode('text-code')">
+                    📋
+                  </button>
+                </div>
+
+                <div class="demo-area">
+                  <div class="text-demo">
+                    <h3 id="typewriter">Type writer effect...</h3>
+                    <p id="counter">0</p>
+                  </div>
+                </div>
+
+                <div class="code-block" id="text-code">
+                  <pre><code>// Typewriter effect
+gsap.to("#typewriter", {
+    text: "Welcome to GSAP!",
+    duration: 2,
+    ease: "none"
+});
+
+// Number counter
+gsap.to("#counter", {
+    textContent: 100,
+    duration: 2,
+    snap: { textContent: 1 },
+    ease: "power2.out"
+});</code></pre>
+                </div>
+              </div>
+            </section>
+
+            <!-- GSDevTools -->
+            <section id="gsdevtools" class="content-section">
+              <h2>GSDevTools</h2>
+              <p>Visual timeline scrubber for debugging</p>
+
+              <div class="demo-container">
+                <div class="demo-controls">
+                  <button class="btn-primary" onclick="createDevTools()">
+                    Create DevTools
+                  </button>
+                  <button
+                    class="btn-secondary"
+                    onclick="toggleCode('devtools-code')"
+                  >
+                    Toggle Code
+                  </button>
+                  <button class="btn-icon" onclick="copyCode('devtools-code')">
+                    📋
+                  </button>
+                </div>
+
+                <div class="demo-area">
+                  <div class="demo-box" id="devtools-box">Debug me!</div>
+                </div>
+
+                <div class="code-block" id="devtools-code">
+                  <pre><code>const tl = gsap.timeline();
+tl.to("#devtools-box", { x: 200, duration: 1 })
+  .to("#devtools-box", { y: 100, duration: 1 })
+  .to("#devtools-box", { rotation: 360, duration: 1 });
+
+// Create dev tools
+GSDevTools.create({
+    animation: tl,
+    globalSync: false
+});</code></pre>
+                </div>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
